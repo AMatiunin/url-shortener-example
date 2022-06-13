@@ -1,0 +1,55 @@
+#inherit_from: .rubocop_todo.yml
+AllCops:
+  TargetRubyVersion: '3.0.3'
+  DisplayCopNames: true
+  Exclude:
+    - bin/*
+    - config/**/*
+    - config/application.rb
+    - db/**/*
+    - node_modules/**/*
+
+Documentation:
+  Enabled: false
+
+Metrics/ClassLength:
+  Max: 250
+
+Metrics/MethodLength:
+  Max: 50
+  Exclude:
+    - lib/tasks/*.rake
+
+Metrics/AbcSize:
+  Max: 30
+
+Layout/EndOfLine:
+  EnforcedStyle: lf
+
+Metrics/BlockLength:
+  Max: 30
+  Exclude:
+    - spec/**/*
+    - lib/tasks/*.rake
+    - config/routes.rb
+    - config/environments/*
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/ParameterLists:
+  Max: 10
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/BlockComments:
+  Exclude:
+    - spec/spec_helper.rb
+
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - !ruby/regexp /.xml.builder$/
+
+Lint/MissingSuper:
+  Enabled: false

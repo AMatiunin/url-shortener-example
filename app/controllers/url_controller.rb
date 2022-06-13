@@ -1,15 +1,25 @@
 class UrlController < ApplicationController
 
   def short
-    short_url = Shortener.shorts_url(params.permit(:full_url)[:full_url])
+    if params.permit(:full_url)[:full_url].blank?
 
-    render json: { short_url: short_url, status: 201 }
+      render json: { message: "Need URL" }
+    else
+      short_url = Shortener.shorts_url(params.permit(:full_url)[:full_url], request.host)
+
+      render json: { short_url: short_url, status: 200 }
+    end
   end
 
   def find
-    url = manage_url
+    if params.permit(:short_url)[:short_url].blank?
 
-    render json: { full_url: url.full_url, timestamp: url.created_at, status: 200 }
+      render json: { message: "Need URL" }
+    else
+      url = manage_url
+
+      render json: { full_url: url.full_url, timestamp: url.created_at, status: 200 }
+    end
   end
 
   def index
